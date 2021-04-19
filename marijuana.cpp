@@ -127,7 +127,7 @@ int main() {
               test.setOutlineColor(sf::Color(39, 121, 21));
               test.setOutlineThickness(1);
               test.setPosition(80, 200);
-              test.setString("This would be info \nabout button clicked!!!");
+              test.setString("This would be info about\n history button clicked!!!");
               window.draw(test);
               window.display();
 
@@ -156,8 +156,41 @@ int main() {
         // Conviction erasure button click
         if (isMouseOver(window, convict)) {
           if (event.mouseButton.button == sf::Mouse::Left) {
-            // Conviction erasure info page is displayed
-            std::cout << "Button was Clicked!\n";
+            while(window.isOpen()) {
+              window.clear(sf::Color(137, 197, 125));
+              window.draw(home);
+              homelabel.setString("Back to Home");
+              homelabel.setCharacterSize(12);
+              window.draw(homelabel);
+              sf::Text test;
+              test.setFont(font);
+              test.setFillColor(sf::Color::White);
+              test.setOutlineColor(sf::Color(39, 121, 21));
+              test.setOutlineThickness(1);
+              test.setPosition(80, 200);
+              test.setString("This would be info about\n convict button clicked!!!");
+              window.draw(test);
+              window.display();
+
+              // Check for events (window closing or button pushing)
+              while (window.pollEvent(event)) {
+                // Close window/program on exit click (top right 'x')
+                if (event.type == sf::Event::Closed) {
+                window.close();
+                }
+                if (sf::Event::MouseButtonPressed) {
+                  if (isMouseOver(window, home)) {
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                      count++;
+                      break;
+                    }
+                  }
+                }
+              }
+              if (count > 0) {
+                break;
+              }
+            }
           }
         }
 
