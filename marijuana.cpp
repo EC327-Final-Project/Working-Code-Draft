@@ -147,6 +147,7 @@ int main() {
                 }
               }
               if (count > 0) {
+                window.clear(sf::Color(137, 197, 125));
                 break;
               }
             }
@@ -188,6 +189,7 @@ int main() {
                 }
               }
               if (count > 0) {
+                window.clear(sf::Color(137, 197, 125));
                 break;
               }
             }
