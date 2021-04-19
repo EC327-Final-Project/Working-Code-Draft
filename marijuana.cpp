@@ -65,6 +65,17 @@ int main() {
   convlabel.setOutlineThickness(0.2);
   convlabel.setPosition(450+2-bwidth, 130+10); // Weird numbers for formatting
 
+  // Home button and label declarations
+  sf::RectangleShape home(sf::Vector2f(bheight, bwidth));
+  home.setPosition(300, 10);
+  home.setFillColor(sf::Color::White);
+  home.setRotation(90);
+  sf::Text homelabel;
+  homelabel.setFont(font);
+  homelabel.setFillColor(sf::Color(39, 121, 21));
+  homelabel.setOutlineColor(sf::Color::Black);
+  homelabel.setOutlineThickness(0.2);
+  homelabel.setPosition(210, 17);
   // Repeat button and label declarations using above template as needed
 
   // Framerate limit and declaring event for use
@@ -87,6 +98,9 @@ int main() {
     window.display();
     window.clear(sf::Color(137, 197, 125));
 
+    // Count for back to home button push
+    int count = 0;
+
     // Check for events (window closing or button pushing)
     sf::Event event;
     while (window.pollEvent(event)) {
@@ -101,15 +115,18 @@ int main() {
         // History button click
         if (isMouseOver(window, history)) {
           if (event.mouseButton.button == sf::Mouse::Left) {
-            std::cout << "Click\n";
             while(window.isOpen()) {
               window.clear(sf::Color(137, 197, 125));
+              window.draw(home);
+              homelabel.setString("Back to Home");
+              homelabel.setCharacterSize(12);
+              window.draw(homelabel);
               sf::Text test;
               test.setFont(font);
               test.setFillColor(sf::Color::White);
               test.setOutlineColor(sf::Color(39, 121, 21));
               test.setOutlineThickness(1);
-              test.setPosition(80, 10);
+              test.setPosition(80, 200);
               test.setString("This would be info \nabout button clicked!!!");
               window.draw(test);
               window.display();
@@ -120,7 +137,17 @@ int main() {
                 if (event.type == sf::Event::Closed) {
                 window.close();
                 }
-                // Put in main page button click action here
+                if (sf::Event::MouseButtonPressed) {
+                  if (isMouseOver(window, home)) {
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                      count++;
+                      break;
+                    }
+                  }
+                }
+              }
+              if (count > 0) {
+                break;
               }
             }
           }
