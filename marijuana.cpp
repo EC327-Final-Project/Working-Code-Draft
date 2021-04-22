@@ -76,6 +76,30 @@ int main() {
   homelabel.setOutlineColor(sf::Color::Black);
   homelabel.setOutlineThickness(0.2);
   homelabel.setPosition(210, 17);
+
+  // Next Page button and label declarations
+  sf::RectangleShape next(sf::Vector2f(bheight, bwidth));
+  next.setPosition(430, 400);
+  next.setFillColor(sf::Color::White);
+  next.setRotation(90);
+  sf::Text nextlabel;
+  nextlabel.setFont(font);
+  nextlabel.setFillColor(sf::Color(39, 121, 21));
+  nextlabel.setOutlineColor(sf::Color::Black);
+  nextlabel.setOutlineThickness(0.2);
+  nextlabel.setPosition(350, 407);
+
+  // Previous Page button and label declarations
+  sf::RectangleShape prev(sf::Vector2f(bheight, bwidth));
+  prev.setPosition(160, 400);
+  prev.setFillColor(sf::Color::White);
+  prev.setRotation(90);
+  sf::Text prevlabel;
+  prevlabel.setFont(font);
+  prevlabel.setFillColor(sf::Color(39, 121, 21));
+  prevlabel.setOutlineColor(sf::Color::Black);
+  prevlabel.setOutlineThickness(0.2);
+  prevlabel.setPosition(70, 407);
   // Repeat button and label declarations using above template as needed
 
   // Framerate limit and declaring event for use
@@ -114,6 +138,7 @@ int main() {
 
         // History button click
         if (isMouseOver(window, history)) {
+          history.setFillColor(sf::Color::Black);
           if (event.mouseButton.button == sf::Mouse::Left) {
             while(window.isOpen()) {
               window.clear(sf::Color(137, 197, 125));
@@ -121,13 +146,22 @@ int main() {
               homelabel.setString("Back to Home");
               homelabel.setCharacterSize(12);
               window.draw(homelabel);
+              window.draw(next);
+              nextlabel.setString("Next Page");
+              nextlabel.setCharacterSize(12);
+              window.draw(nextlabel);
+              // window.draw(prev);
+              // prevlabel.setString("Previous Page");
+              // prevlabel.setCharacterSize(12);
+              // window.draw(prevlabel);
               sf::Text test;
               test.setFont(font);
               test.setFillColor(sf::Color::White);
               test.setOutlineColor(sf::Color(39, 121, 21));
-              test.setOutlineThickness(1);
-              test.setPosition(80, 200);
-              test.setString("This would be info about\n history button clicked!!!");
+              test.setOutlineThickness(0.5);
+              test.setPosition(25, 100);
+              test.setCharacterSize(12);
+              test.setString("Marijuana has been used throughout history for its medicinal properties and \napplications. It was grown for use in hemp products but also ingested for its \npsychoactive properties. Typically, the plant was used to treat a number of \nailments such as depression, headaches, sleeplessness, and even for treating \naddictions to other drugs like opium. Many medical professionals prescribed \nmarijuana to patients as a regular drug around the world. In the United States, \nit was not until 1911 that the plant was first considered illegal when \nMassahcusetts became the first state to outlaw it. Many states began to \nfollow suit until 1937, where the Marijuana Tax Act was enacted and \nessentially classified the plant as an outlawed substance. Marijuana and its \neffects were still studied but its use was prohibited. In 1970, the United \nStates enacted the Controlled Substances Act and declared that \nmarijuana had no accepted medical uses. In contrast, the National Organization \nfor the Reform of Marijuana Laws was founded in 1970 as some people still \nfelt that marijuana prohibition was unjust.");
               window.draw(test);
               window.display();
 
@@ -139,10 +173,69 @@ int main() {
                 }
                 if (sf::Event::MouseButtonPressed) {
                   if (isMouseOver(window, home)) {
+                    home.setFillColor(sf::Color::Black);
                     if (event.mouseButton.button == sf::Mouse::Left) {
                       count++;
                       break;
                     }
+                  } else {
+                      home.setFillColor(sf::Color::White);
+                  }
+                  if (isMouseOver(window, next)) {
+                    next.setFillColor(sf::Color::Black);
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                      while(window.isOpen()) {
+                        next.setFillColor(sf::Color::White);
+                        window.clear(sf::Color(137, 197, 125));
+                        window.draw(home);
+                        homelabel.setString("Back to Home");
+                        homelabel.setCharacterSize(12);
+                        window.draw(homelabel);
+                        window.draw(next);
+                        nextlabel.setString("Next Page");
+                        nextlabel.setCharacterSize(12);
+                        window.draw(nextlabel);
+                        // window.draw(prev);
+                        // prevlabel.setString("Previous Page");
+                        // prevlabel.setCharacterSize(12);
+                        // window.draw(prevlabel);
+                        sf::Text test;
+                        test.setFont(font);
+                        test.setFillColor(sf::Color::White);
+                        test.setOutlineColor(sf::Color(39, 121, 21));
+                        test.setOutlineThickness(0.5);
+                        test.setPosition(25, 100);
+                        test.setCharacterSize(12);
+                        test.setString("Page 2");
+                        window.draw(test);
+                        window.display();
+                        while(window.pollEvent(event)) {
+                          if(event.type == sf::Event::Closed) {
+                            window.close();
+                          }
+                          if (sf::Event::MouseButtonPressed) {
+                            if (isMouseOver(window, home)) {
+                              home.setFillColor(sf::Color::Black);
+                              if (event.mouseButton.button == sf::Mouse::Left) {
+                                count++;
+                                break;
+                              }
+                            } else {
+                              home.setFillColor(sf::Color::White);
+                            }
+                            if (isMouseOver(window, next)) {
+
+                            }
+                          }
+                        }
+                        if (count > 0) {
+                          window.clear(sf::Color(137, 197, 125));
+                          break;
+                        }
+                      }
+                    }
+                  } else {
+                      next.setFillColor(sf::Color::White);
                   }
                 }
               }
@@ -152,10 +245,13 @@ int main() {
               }
             }
           }
+        } else {
+          history.setFillColor(sf::Color::White);
         }
 
         // Conviction erasure button click
         if (isMouseOver(window, convict)) {
+          convict.setFillColor(sf::Color::Black);
           if (event.mouseButton.button == sf::Mouse::Left) {
             while(window.isOpen()) {
               window.clear(sf::Color(137, 197, 125));
@@ -194,6 +290,8 @@ int main() {
               }
             }
           }
+        } else {
+          convict.setFillColor(sf::Color::White);
         }
 
         // Repeat above setup for all button objects
