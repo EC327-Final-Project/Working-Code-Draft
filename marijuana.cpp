@@ -10,19 +10,19 @@ const int microsec = 1000000;
 // Function for button pressing
 bool isMouseOver(sf::RenderWindow &window, sf::RectangleShape &button) {
   // Mouse x and y coords
-  int mouseX = sf::Mouse::getPosition(window).x;
-  int mouseY = sf::Mouse::getPosition(window).y;
+  int msx = sf::Mouse::getPosition(window).x;
+  int msy = sf::Mouse::getPosition(window).y;
 
   // Button Start Position coords
-  int btnPosX = button.getPosition().x;
-  int btnPosY = button.getPosition().y;
+  int btnx = button.getPosition().x;
+  int btny = button.getPosition().y;
 
   // Button End Position coords
-  int btnxPosWidth = button.getPosition().x + bwidth;
-  int btnyPosHeight = button.getPosition().y + bheight;
+  int btnxx = button.getPosition().x + bwidth;
+  int btnyy = button.getPosition().y + bheight;
 
   // Check to see if mouse is within button bounds
-  if (mouseX < btnPosX && mouseX > btnPosX - bwidth && mouseY < btnyPosHeight && mouseY > btnPosY) {
+  if (msx < btnx && msx > btnx - bwidth && msy < btnyy && msy > btny) {
     return true;
   }
   return false;
